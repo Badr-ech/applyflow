@@ -1,6 +1,6 @@
 # ApplyFlow
 
-A full-stack job application tracking platform with event-driven architecture. Built with Spring Boot 3.2 and Angular 17.
+A full stack job application tracking platform with event-driven architecture. Built with Spring Boot 3.2 and Angular 17.
 
 ## Features
 
