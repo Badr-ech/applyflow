@@ -1,11 +1,7 @@
 package com.applyflow.api.dto;
 
-import com.applyflow.domain.ApplicationStatus;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-
-import java.time.LocalDateTime;
 
 @Data
 public class CreateApplicationRequest {
