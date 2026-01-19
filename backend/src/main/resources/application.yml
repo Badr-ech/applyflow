@@ -1,0 +1,94 @@
+spring:
+  application:
+    name: applyflow
+
+  profiles:
+    active: dev
+
+  jpa:
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-stacktrace: on_param
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+logging:
+  level:
+    com.applyflow: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:h2:mem:applyflow
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.H2Dialect
+
+applyflow:
+  demo-data:
+    enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/applyflow}
+    username: ${DATABASE_USER:applyflow}
+    password: ${DATABASE_PASSWORD:applyflow}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+applyflow:
+  demo-data:
+    enabled: false
+
+logging:
+  level:
+    com.applyflow: INFO
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
